@@ -19,6 +19,7 @@ namespace WpfApp2
     /// </summary>
     public partial class RegistrationWindow : Window
     {
+        DataBase dataBase = new DataBase();
         public RegistrationWindow()
         {
             InitializeComponent();
@@ -93,6 +94,16 @@ namespace WpfApp2
                 textBox.Foreground = Brushes.Silver;
                 textBox.Visibility = Visibility.Visible;
             }
+        }
+
+        //Событие при нажатии на кнопку зарегестрироваться
+        private void RegistrationButton_Click(object sender, RoutedEventArgs e)
+        {
+            var nameVar = TextBoxName.Text;
+            var loginVar = TextBoxLogin.Text;
+            var passwordVar = PasswordBoxVis.Password;
+
+
         }
     }
 }
