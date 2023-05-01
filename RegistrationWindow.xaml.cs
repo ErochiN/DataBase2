@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -101,9 +103,51 @@ namespace WpfApp2
         {
             var nameVar = TextBoxName.Text;
             var loginVar = TextBoxLogin.Text;
-            var passwordVar = PasswordBoxVis.Password;
+            var passwordVar = PasswordBoxVis.Password.ToString();
+            var dos = "1";
 
+            string querystring = $"insert into SchoolTable(NAME, LOGIN, PASSWORD, DOSTUP) values('{nameVar}', '{loginVar}', '{passwordVar}', '{dos}')";
 
+            SqlCommand sqlCommand = new SqlCommand(querystring, dataBase.GetConnection());
+
+            dataBase.OpenConnection();
+
+            if (sqlCommand.ExecuteNonQuery() == 1)
+            {
+                MessageBox.Show("All Ok");
+            }
+            else 
+            {
+                MessageBox.Show("Error");
+            }
+
+            dataBase.ClosedConnection();
+        }
+
+        private Boolean checkUser() 
+        {
+            var nameVar = TextBoxName.Text;
+            var loginVar = TextBoxLogin.Text;
+            var passwordVar = PasswordBoxVis.Password.ToString();
+
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            DataTable table = new DataTable();
+
+            string querystring = $"select id, NAME, LOGIN, PASSWORD, DOSTUP from SchoolTable where NAME = '{nameVar}' and LOGIN = '{loginVar}' and PASSWORD = '{passwordVar}' and DOSTUP = '1'";
+
+            SqlCommand command = new SqlCommand(querystring, dataBase.GetConnection());
+
+            adapter.SelectCommand = command;
+            adapter.Fill(table);
+            if (table.Rows.Count > 0)
+            {
+                MessageBox.Show("Кажется такой аккаунт уже существует");
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
