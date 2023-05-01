@@ -104,7 +104,7 @@ namespace WpfApp2
             var nameVar = TextBoxName.Text;
             var loginVar = TextBoxLogin.Text;
             var passwordVar = PasswordBoxVis.Password.ToString();
-            var dos = "1";
+            var dos = "0";
 
             string querystring = $"insert into SchoolTable(NAME, LOGIN, PASSWORD, DOSTUP) values('{nameVar}', '{loginVar}', '{passwordVar}', '{dos}')";
 
@@ -133,7 +133,7 @@ namespace WpfApp2
             SqlDataAdapter adapter = new SqlDataAdapter();
             DataTable table = new DataTable();
 
-            string querystring = $"select id, NAME, LOGIN, PASSWORD, DOSTUP from SchoolTable where NAME = '{nameVar}' and LOGIN = '{loginVar}' and PASSWORD = '{passwordVar}' and DOSTUP = '1'";
+            string querystring = $"select id, NAME, LOGIN, PASSWORD, DOSTUP from SchoolTable where NAME = '{nameVar}' and LOGIN = '{loginVar}' and PASSWORD = '{passwordVar}' and DOSTUP = '0'";
 
             SqlCommand command = new SqlCommand(querystring, dataBase.GetConnection());
 
