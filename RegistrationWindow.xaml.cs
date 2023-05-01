@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +21,7 @@ namespace WpfApp2
     /// </summary>
     public partial class RegistrationWindow : Window
     {
+        DataBase dataBase = new DataBase();
         public RegistrationWindow()
         {
             InitializeComponent();
@@ -92,6 +95,58 @@ namespace WpfApp2
                 textBox.Text = text;
                 textBox.Foreground = Brushes.Silver;
                 textBox.Visibility = Visibility.Visible;
+            }
+        }
+
+        //Событие при нажатии на кнопку зарегестрироваться
+        private void RegistrationButton_Click(object sender, RoutedEventArgs e)
+        {
+            var nameVar = TextBoxName.Text;
+            var loginVar = TextBoxLogin.Text;
+            var passwordVar = PasswordBoxVis.Password.ToString();
+            var dos = "0";
+
+            string querystring = $"insert into SchoolTable(NAME, LOGIN, PASSWORD, DOSTUP) values('{nameVar}', '{loginVar}', '{passwordVar}', '{dos}')";
+
+            SqlCommand sqlCommand = new SqlCommand(querystring, dataBase.GetConnection());
+
+            dataBase.OpenConnection();
+
+            if (sqlCommand.ExecuteNonQuery() == 1)
+            {
+                MessageBox.Show("All Ok");
+            }
+            else 
+            {
+                MessageBox.Show("Error");
+            }
+
+            dataBase.ClosedConnection();
+        }
+
+        private Boolean checkUser() 
+        {
+            var nameVar = TextBoxName.Text;
+            var loginVar = TextBoxLogin.Text;
+            var passwordVar = PasswordBoxVis.Password.ToString();
+
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            DataTable table = new DataTable();
+
+            string querystring = $"select id, NAME, LOGIN, PASSWORD, DOSTUP from SchoolTable where NAME = '{nameVar}' and LOGIN = '{loginVar}' and PASSWORD = '{passwordVar}' and DOSTUP = '0'";
+
+            SqlCommand command = new SqlCommand(querystring, dataBase.GetConnection());
+
+            adapter.SelectCommand = command;
+            adapter.Fill(table);
+            if (table.Rows.Count > 0)
+            {
+                MessageBox.Show("Кажется такой аккаунт уже существует");
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

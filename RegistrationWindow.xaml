@@ -29,6 +29,8 @@
         <TextBox x:Name="TextBoxLogin" Grid.Column="0" PreviewMouseLeftButtonDown="ClickingPromptingLogin" HorizontalAlignment="Center" Grid.RowSpan="2" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="520" Grid.ColumnSpan="3" Text="Логин" Foreground="Silver"/>
         <TextBox x:Name="PasswordBoxHea" Grid.Column="0" PreviewMouseLeftButtonDown="ClickingPromptingPassword" HorizontalAlignment="Center" Grid.RowSpan="2" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" Width="520" Grid.ColumnSpan="3" Text="Пароль" Foreground="Silver"/>
         <PasswordBox x:Name="PasswordBoxVis" Grid.Column="0" PreviewMouseLeftButtonDown="ClickingPromptingPassword" HorizontalAlignment="Center" Grid.RowSpan="2" Grid.Row="3" VerticalAlignment="Center" Width="520" Grid.ColumnSpan="3" />
+        <Button x:Name="RegistrationButton" Content="Зарегистрироваться" HorizontalAlignment="Center" Grid.Row="5" VerticalAlignment="Center" Grid.Column="1" Click="RegistrationButton_Click"/>
+        <Button x:Name="LoginButton" Content="Вход" HorizontalAlignment="Center" Grid.Row="6" VerticalAlignment="Center" Grid.Column="1"/>
         
     </Grid>
 </Window>

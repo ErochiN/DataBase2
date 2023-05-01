@@ -9,7 +9,7 @@ namespace WpfApp2
 {
     internal class DataBase
     {
-        SqlConnection sqlConnection = new SqlConnection(@"Data Source=DESKTOP-F7J2KE8\SQLEXPRESS;Initial Catalog=School;Integrated Security=True");
+        SqlConnection sqlConnection = new SqlConnection(@"Data Source=DESKTOP-F7J2KE8\SQLEXPRESS;Initial Catalog=School2;Integrated Security=True");
 
         public void OpenConnection() 
         {
